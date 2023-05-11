@@ -11,6 +11,7 @@ function App() {
       <li><a href="/">home</a></li>
       <li><a href="/contact">contact</a></li>
       </ul>
+      <p> this page is exmaple of routing  in react client side without using react-router package which makes thing complex to achive this we have used window object and switch case</p>
       <RoutingWithoutPackage></RoutingWithoutPackage>
     </div>
   );

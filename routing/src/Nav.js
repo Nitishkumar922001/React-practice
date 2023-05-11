@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Nav1()
 {
@@ -8,7 +8,12 @@ function Nav1()
     <br></br>
     <Link to='/home'>home</Link>
     <br/>
-    <Link to='/user/yashmonkey'>user</Link>
+    <Link to='/user/yashmonkey'>useParams</Link>
+    <br/>
+   <NavLink className="bg-color " to="/navlink">NavLink</NavLink>
+  <br/>
+  <br/>
+   <NavLink style={({isActive})=>({backgroundColor:isActive?'green':'red'})}to="/navlink">NavLink-example2</NavLink>
     </>)
 }
 export default Nav1;

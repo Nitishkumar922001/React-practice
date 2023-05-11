@@ -1,6 +1,7 @@
-import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import {BrowserRouter,Routes,Route, NavLink} from 'react-router-dom'
 import Nav1 from './Nav.js';
 import UserParamsHook from './UserParamsHook.js';
+import NavLink1 from './NavLink.js';
 function RoutingWithReactRouter()
 {
 return(
@@ -14,6 +15,7 @@ return(
                 <Route path='/signup' element={<h1>signup</h1>}></Route>
                 <Route path='/home' element={<h1>home</h1>}/>
                 <Route path='/user/:name' element={<UserParamsHook/>}/>
+                <Route path='/navlink' element={<NavLink1/>}/>
                 <Route path='/*' element={<h1>error</h1>}/>
                 
             </Routes>

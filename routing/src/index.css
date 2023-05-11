@@ -14,3 +14,9 @@ code {
 #root{
   padding: 30px;
 }
+.bg-color{
+  background-color: red;
+}
+.active{
+  background-color:green;
+}

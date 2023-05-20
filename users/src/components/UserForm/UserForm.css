@@ -1,6 +1,6 @@
 .form-div {
   margin-top: 20px;
- 
+ background-color: white;
   width: 40%;
 
   padding: 20px;
@@ -15,6 +15,7 @@
 .form-div label{
     text-align: left;
     display: block;
+    font-weight: bold;
 }
 .input-group{width: 100%;}
 .input-group

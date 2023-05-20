@@ -1,6 +1,7 @@
 .user-list{
  list-style: none;
  text-align: left;
+ background-color: white;
  padding: 20px;
     width: 40%;
    border-radius: 5px;

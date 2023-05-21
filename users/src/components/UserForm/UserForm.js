@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ErrorDialogBox from "../UI/ErrorDialogBox.js";
+import ErrorPopUp from "../UI/ErrorDialogBox.js";
 import "./UserForm.css";
 function UserForm(props) {
   const [user, setUser] = useState({ userName: "", age: "" });
@@ -11,21 +13,25 @@ function UserForm(props) {
   function onsubmitHandler(event) {
     event.preventDefault();
     if(user.userName.length===0)
-    {
-      setError({msg:'user name felid can not be empty'})
+    {setError('user name felid can not be empty')
       return;
     }
     if(user.age<1)
-    { setError({})
-    setError({msg:'user age must be (>0)'})  
+    { 
+    setError('user age must be (>0) years');  
     return;
-
     }
     props.addusers(user);
     setUser({userName:'',age:''});
   }
+  function errorHandler()
+  {
+    setError();
+  return;
+  }
   return (
-    //    <div >
+       <>
+      {error&&<ErrorDialogBox errHandler={errorHandler} errormsg={error}/>}
     <form className="form-div">
       <div className="input-group">
         <label htmlFor="userName">userName</label>
@@ -43,7 +49,7 @@ function UserForm(props) {
       </div>
       <button onClick={onsubmitHandler}>Add user </button>
     </form>
-    // </div>
+     </>
   );
 }
 export default UserForm;

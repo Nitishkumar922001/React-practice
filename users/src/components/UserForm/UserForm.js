@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ErrorDialogBox from "../UI/ErrorDialogBox.js";
 import ErrorPopUp from "../UI/ErrorDialogBox.js";
 import "./UserForm.css";
 function UserForm(props) {
-  const [user, setUser] = useState({ userName: "", age: "" });
+  // const [user, setUser] = useState({ userName: "", age: "" });
+  const Name=useRef();
+  const Age=useRef()
   const [error,setError]=useState();
 
-  function onChangeHandler(event) {
-    setUser({ ...user, [event.target.name]: event.target.value });
-  }
+  // function onChangeHandler(event) {
+  //   setUser({ ...user, [event.target.name]: event.target.value });
+  // }
 
   function onsubmitHandler(event) {
     event.preventDefault();
+    const user={userName:Name.current.value,age:Age.current.value}
     if(user.userName.length===0)
     {setError('user name felid can not be empty')
       return;
@@ -22,7 +25,9 @@ function UserForm(props) {
     return;
     }
     props.addusers(user);
-    setUser({userName:'',age:''});
+    Name.current.value='';
+    Age.current.value='';
+    // setUser({userName:'',age:''});
   }
   function errorHandler()
   {
@@ -39,13 +44,21 @@ function UserForm(props) {
           type="text"
           id="userName"
           name="userName"
-          value={user.userName}
-          onChange={onChangeHandler}
+          ref={Name}
+          // value={user.userName}
+          // onChange={onChangeHandler}
         />
       </div>
       <div className="input-group">
         <label htmlFor="age">Age(Years)</label>
-        <input type="number" min={1} id="age" name="age" value={user.age}onChange={onChangeHandler} />
+        <input
+         type="number" min={1} 
+         id="age" name="age" 
+        //  value={user.age}
+        //  onChange={onChangeHandler} 
+        ref={Age}
+
+        />
       </div>
       <button onClick={onsubmitHandler}>Add user </button>
     </form>

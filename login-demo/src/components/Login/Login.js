@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -10,34 +10,35 @@ const Login = (props) => {
   const [enteredPassword, setEnteredPassword] = useState('');
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
+ 
+
+  function validate(){
+    setFormIsValid(
+     enteredEmail.includes('@') && enteredPassword.trim().length > 6
+    );
+    setEmailIsValid(enteredEmail.includes('@'));
+    setPasswordIsValid(enteredPassword.trim().length > 6);
+  }
+
+
+useEffect(validate,[enteredPassword,enteredEmail])
+
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
 
-    setFormIsValid(
-      event.target.value.includes('@') && enteredPassword.trim().length > 6
-    );
   };
 
   const passwordChangeHandler = (event) => {
     setEnteredPassword(event.target.value);
-
-    setFormIsValid(
-      event.target.value.trim().length > 6 && enteredEmail.includes('@')
-    );
   };
 
-  const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes('@'));
-  };
-
-  const validatePasswordHandler = () => {
-    setPasswordIsValid(enteredPassword.trim().length > 6);
-  };
+ 
 
   const submitHandler = (event) => {
     event.preventDefault();
     props.onLogin(enteredEmail, enteredPassword);
+ 
   };
 
   return (
@@ -54,7 +55,7 @@ const Login = (props) => {
             id="email"
             value={enteredEmail}
             onChange={emailChangeHandler}
-            onBlur={validateEmailHandler}
+            onBlur={validate}
           />
         </div>
         <div
@@ -68,7 +69,7 @@ const Login = (props) => {
             id="password"
             value={enteredPassword}
             onChange={passwordChangeHandler}
-            onBlur={validatePasswordHandler}
+            onBlur={validate}
           />
         </div>
         <div className={classes.actions}>

@@ -9,31 +9,34 @@ function App() {
   const [Loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
-  async function addMovies(movies)
-  {
-    const respone= await fetch('https://howtosendhttpreq-default-rtdb.firebaseio.com/movies.json',{
-      method:'POST',
-      body:JSON.stringify(movies),
-      headers:{
-        'content-type':'Application/json'
+  async function addMovies(movies) {
+    const respone = await fetch(
+      "https://howtosendhttpreq-default-rtdb.firebaseio.com/movies.json",
+      {
+        method: "POST",
+        body: JSON.stringify(movies),
+        headers: {
+          "content-type": "Application/json",
+        },
       }
-    })
+    );
   }
-  
+
   async function movieFetchHandler() {
     try {
       setLoading(true);
-      const respone = await fetch("https://howtosendhttpreq-default-rtdb.firebaseio.com/movies.json");
+      const respone = await fetch(
+        "https://howtosendhttpreq-default-rtdb.firebaseio.com/movies.json"
+      );
       if (!respone.ok) {
         throw new Error("something went wrong");
       }
       const data = await respone.json();
       console.log(data);
-      const formattedData=[];
-      
-      for (let item in data)
-      {
-          formattedData.push(data[item]);
+      const formattedData = [];
+
+      for (let item in data) {
+        formattedData.push(data[item]);
       }
       console.log(formattedData);
       setMovies(formattedData);
@@ -44,7 +47,9 @@ function App() {
     }
     setLoading(false);
   }
-  useEffect(()=>{movieFetchHandler()},[])
+  useEffect(() => {
+    movieFetchHandler();
+  }, []);
   let content;
   if (Loading) {
     content = <p>...Loading</p>;
@@ -57,9 +62,9 @@ function App() {
   }
   return (
     <React.Fragment>
-    <section>
-      <AddMovie onAddMovie={addMovies}/>
-    </section>
+      <section>
+        <AddMovie onAddMovie={addMovies} />
+      </section>
       <section>
         <button onClick={movieFetchHandler}>Fetch Movies</button>
       </section>
